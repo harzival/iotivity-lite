@@ -18,6 +18,7 @@
 #include <cstdlib>
 
 #include "oc_endpoint.h"
+#include "oc_helpers.h"
 
 TEST(OCEndpoints, StringToEndpoint)
 {
@@ -301,8 +302,12 @@ TEST(OCEndpoints, EndpointStringParsePath)
   }
   {
     oc_string_t path;
-    EXPECT_EQ(-1, oc_endpoint_string_parse_path(NULL, &path));
-    oc_free_string(&path);
+    int ret = oc_endpoint_string_parse_path(NULL, &path);
+    EXPECT_EQ(-1, ret);
+    if (-1 != ret) {
+        // If code is working as expected this should never run.
+        oc_free_string(&path);
+    }
   }
   {
     oc_string_t s;
