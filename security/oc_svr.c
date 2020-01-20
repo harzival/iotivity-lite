@@ -37,10 +37,7 @@ oc_sec_create_svr(void)
   oc_sec_cred_init();
   oc_sec_acl_init();
   oc_sec_ael_init();
-
-#ifdef OC_PKI
   oc_sec_sp_init();
-#endif /* OC_PKI */
 
   size_t i;
   for (i = 0; i < oc_core_get_num_devices(); i++) {
